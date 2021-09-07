@@ -1,7 +1,32 @@
-#include <sorts.h>
+#pragma once
 
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <chrono>
+
+using namespace std;
+using namespace chrono;
 
 template<class T>
+void TestSortFunc(string sortName, void (*sortFunc)(vector<T> &, int, int), vector<T> &a, int l, int r)
+{
+    vector<T> b = a;
+    auto begin = steady_clock::now();
+    sortFunc(b, l, r);
+    auto end = steady_clock::now();
+    auto time = duration_cast<microseconds>(end - begin);
+    for (int i = l; i < r; i++)
+    {
+        if (b[i] > b[i + 1])
+        {
+            cout << sortName << " Error";
+            return;
+        }
+    }
+    cout << sortName << "\n--- " << time.count() / 1e3 << " microseconds ---\n";
+}
+
 void check_input(int &left, int &right, unsigned int size)
 {
     if (right == -1)
@@ -12,7 +37,7 @@ void check_input(int &left, int &right, unsigned int size)
 }
 
 template<class T>
-void bubble_sort(vector<T> &vec, int left, int right)
+void bubble_sort(vector<T> &vec, int left = 0, int right = -1)
 {
     check_input(left, right, vec.size());
 
@@ -29,7 +54,7 @@ void bubble_sort(vector<T> &vec, int left, int right)
 }
 
 template<class T>
-void cocktail_sort(vector<T> &vec, int left, int right)
+void cocktail_sort(vector<T> &vec, int left = 0, int right = -1)
 {
     check_input(left, right, vec.size());
 
@@ -62,7 +87,7 @@ void cocktail_sort(vector<T> &vec, int left, int right)
 }
 
 template<class T>
-void insertion_sort(vector<T> &vec, int left, int right)
+void insertion_sort(vector<T> &vec, int left = 0, int right = -1)
 {
     check_input(left, right, vec.size());
 
@@ -77,7 +102,7 @@ void insertion_sort(vector<T> &vec, int left, int right)
 }
 
 template<class T>
-void count_sort(vector<T> &vec, int left, int right)
+void count_sort(vector<T> &vec, int left = 0, int right = -1)
 {
     check_input(left, right, vec.size());
 
@@ -108,8 +133,10 @@ void count_sort(vector<T> &vec, int left, int right)
 }
 
 template<class T>
-void quick_sort(vector<T> &vec, int first, int last)
+void quick_sort(vector<T> &vec, int first = 0, int last = -1)
 {
+    check_input(first, last, vec.size());
+
     int f = first, l = last;
     int mid = vec[(f + l) / 2];
     do
