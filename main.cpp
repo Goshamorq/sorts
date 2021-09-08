@@ -95,8 +95,9 @@ int main()
                         main_array = ArrayGenerator(n).GenerateRealArray();
                         break;
                 }
-//                TestSortFunc("Bubble", bubble_sort, main_array, 0, n - 1);
-//                TestSortFunc("Cocktail", cocktail_sort, main_array, 0, n - 1);
+//                Bench(main_array, n);
+                TestSortFunc("Bubble", bubble_sort, main_array, 0, n - 1);
+                TestSortFunc("Cocktail", cocktail_sort, main_array, 0, n - 1);
                 TestSortFunc("Insertion", insertion_sort, main_array, 0, n - 1);
                 TestSortFunc("Count", count_sort, main_array, 0, n - 1);
                 TestSortFunc("Quick", quick_sort, main_array, 0, n - 1);

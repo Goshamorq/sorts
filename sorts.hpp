@@ -4,9 +4,41 @@
 #include <algorithm>
 #include <vector>
 #include <chrono>
+#include <fstream>
 
 using namespace std;
 using namespace chrono;
+
+void BenchSortFunc(string sortName, void (*sortFunc)(vector<int> &, int, int), vector<int> &a, int n)
+{
+    string path = "D:\\python_mephi";
+    path.append(sortName.begin(), sortName.end());
+    path.append(".txt");
+    ofstream file(path, ios_base::trunc);
+
+    for (int i = n / 100; i <= n; i += n / 100)
+    {
+        vector <int> b(a.begin(), a.begin() + i);
+        auto begin = steady_clock::now();
+        sortFunc(b, 0, i - 1);
+        auto end = steady_clock::now();
+        auto time = duration_cast<microseconds>(end - begin);
+
+        for (int j = 0; j < i - 1; j++)
+        {
+            if (b[j] > b[j + 1])
+            {
+                cout << sortName << " Error\n";
+                file.close();
+                return;
+            }
+        }
+
+        file << i << " " << time.count() / 1e3 << "\n";
+    }
+    file.close();
+}
+
 
 template<class T>
 void TestSortFunc(string sortName, void (*sortFunc)(vector<T> &, int, int), vector<T> &a, int l, int r)
@@ -155,3 +187,12 @@ void quick_sort(vector<T> &vec, int first = 0, int last = -1)
     if (f < last) quick_sort(vec, f, last);
 }
 
+template<class T>
+void Bench(vector<T> &a, int n)
+{
+    BenchSortFunc("Bubble Sort", bubble_sort, a, n);
+    BenchSortFunc("Insertion Sort", insertion_sort, a, n);
+    BenchSortFunc("Cocktail Sort", cocktail_sort, a, n);
+    BenchSortFunc("Quick Sort", quick_sort, a, n);
+    BenchSortFunc("Count Sort", count_sort, a, n);
+}
