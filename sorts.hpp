@@ -27,7 +27,7 @@ void TestSortFunc(string sortName, void (*sortFunc)(vector<T> &, int, int), vect
     cout << sortName << "\n--- " << time.count() / 1e3 << " microseconds ---\n";
 }
 
-void check_input(int &left, int &right, unsigned int size)
+void check_input(int &left, int &right, int size)
 {
     if (right == -1)
         right = size - 1;
