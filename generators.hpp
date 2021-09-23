@@ -49,14 +49,9 @@ struct ArrayGenerator
         {
             int k = min(i + (rand() % n) / 10, n);
             sort(a.begin() + i, a.begin() + k);
-//            int count_of_swap = rand() % (k / 4);
-//            for (int j = 0; j < count_of_swap; j++)
-//            {
-//                swap(a[i + rand() % (k - i)], a[i + rand() % (k - i)]);
-//            }
             if (k % 2 == 0)
                 reverse(a.begin() + i, a.begin() + k);
-            i += k - 1;
+            i += k - 1 + rand() % k;
         }
 
         return a;
