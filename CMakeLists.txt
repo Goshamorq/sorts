@@ -5,7 +5,7 @@ project(sorts)
 set(CMAKE_CXX_STANDARD 23)
 #set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
-add_executable(sorts main.cpp sorts.hpp generators.hpp sequence.hpp sequence_list.hpp)
+add_executable(sorts main.cpp sorts.hpp generators.hpp sequence.hpp sequence_list.hpp ISorter.hpp vectorSequence.hpp)
 #add_executable(laba1 src/main.cpp include/sorts.h src/sorts.cpp)
 
 #include_directories(include)

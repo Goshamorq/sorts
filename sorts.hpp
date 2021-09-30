@@ -18,7 +18,7 @@ void BenchSortFunc(string sortName, void (*sortFunc)(vector<int> &, int, int), v
 
     for (int i = n / 100; i <= n; i += n / 100)
     {
-        vector <int> b(a.begin(), a.begin() + i);
+        vector<int> b(a.begin(), a.begin() + i);
         auto begin = steady_clock::now();
         sortFunc(b, 0, i - 1);
         auto end = steady_clock::now();
@@ -59,7 +59,7 @@ void TestSortFunc(string sortName, void (*sortFunc)(vector<T> &, int, int), vect
     cout << sortName << "\n--- " << time.count() / 1e3 << " microseconds ---\n";
 }
 
-void check_input(int &left, int &right, int size)
+inline void check_input(int &left, int &right, int size)
 {
     if (right == -1)
         right = size - 1;

@@ -1,91 +1,214 @@
 #include "sorts.hpp"
 #include "generators.hpp"
 #include "sequence_list.hpp"
+#include "ISorter.hpp"
+#include "vectorSequence.hpp"
 
 int main()
 {
-    const string MENU = "1. Enter the array by keyboard\n2. Enter the array by random\n3. Bubble sort\n4. Cocktail "
-                        "sort\n5. Insertion sort\n6. Count sort\n7. Quick sort\n8. Test\n0. Exit\n";
+    const string MENU = "1. Bubble sort\n2. Cocktail sort\n3. Insertion sort\n4. Count sort\n5. Quick sort\n0. Exit\n";
+
     int choice = -1;
     int n = -1;
-    int type_of_array = -1;
 
     vector<int> main_array; // массив с числами
-    main_array = ArrayGenerator(100).GenerateRandomArray();
-    int arr[3] = {3,2,1};
-    Linked_List_Sequence<int> a(arr, 3);
-    a.print();
-//    while (choice != 0)
-//    {
-//        cout << MENU;
-//        cin >> choice;
-//        switch (choice)
-//        {
-//            case 1:
-//                cout << "Choose a length of the array\n";
-//                while (n < 0)
-//                    cin >> n;
-//                cout << "Enter an elements\n";
-//                main_array.resize(n);
-//                for (int i = 0; i < n; ++i)
-//                    cin >> main_array[i];
-//                break;
-//
-//            case 2:
-//                cout << "Choose a length of the array\n";
-//                while (n < 0)
-//                    cin >> n;
-//                main_array.resize(n);
-//                for (int i = 0; i < n; ++i)
-//                    main_array[i] = rand() % INT32_MAX;
-//                break;
-//            case 3:
-//                if (main_array.empty())
-//                {
-//                    cout << "Enter the array!\n";
-//                    break;
-//                }
-//                TestSortFunc("Bubble sort", bubble_sort, main_array, 0, n - 1);
-//                break;
-//            case 4:
-//                if (main_array.empty())
-//                {
-//                    cout << "Enter the array!\n";
-//                    break;
-//                }
-//                TestSortFunc("Cocktail sort", cocktail_sort, main_array, 0, n - 1);
-//                break;
-//            case 5:
-//                if (main_array.empty())
-//                {
-//                    cout << "Enter the array!\n";
-//                    break;
-//                }
-//                TestSortFunc("Insertion sort", insertion_sort, main_array, 0, n - 1);
-//                break;
-//
-//            case 6:
-//                if (main_array.empty())
-//                {
-//                    cout << "Enter the array!\n";
-//                    break;
-//                }
-//                TestSortFunc("Count sort", count_sort, main_array, 0, n - 1);
-//                break;
-//
-//            case 7:
-//                if (main_array.empty())
-//                {
-//                    cout << "Enter the array!\n";
-//                    break;
-//                }
-//                TestSortFunc("Quick sort", quick_sort, main_array, 0, n - 1);
-//                break;
+
+    ISorter<int, Linked_List_Sequence<int>> sorter_for_list;
+    ISorter<int, vectorSequence<int>> sorter_for_vector;
+
+
+    while (choice != 0)
+    {
+        cout << MENU;
+        cin >> choice;
+        switch (choice)
+        {
+            case 1:
+            {
+                cout << "Input the length of the array: \n";
+                cin >> n;
+                main_array = ArrayGenerator(n).GenerateRandomArray();
+
+                Linked_List_Sequence<int> list(main_array, static_cast<int>(main_array.size()));
+                vectorSequence<int> vec(main_array);
+
+                cout << "Do you want to compare arrays before the sorting ans after? (1-yes, 2-no)\n";
+                int var;
+                cin >> var;
+                if (var == 1)
+                {
+                    cout << "For the list:\n";
+                    list.print();
+                    cout << "For the vector:\n";
+                    vec.print();
+                    cout << "\n\n";
+                }
+
+                sorter_for_list.bubble_sort(list, 0, list.getLength() - 1);
+                sorter_for_vector.bubble_sort(vec, 0, list.getLength() - 1);
+
+                if (var == 1)
+                {
+                    cout << "For the list:\n";
+                    list.print();
+                    cout << "For the vector:\n";
+                    vec.print();
+                    cout <<"\n\n";
+                }
+                list.isSorted();
+                vec.isSorted();
+
+                break;
+            }
+            case 2:
+            {
+                cout << "Input the length of the array: \n";
+                cin >> n;
+                main_array = ArrayGenerator(n).GenerateRandomArray();
+
+                Linked_List_Sequence<int> list(main_array, static_cast<int>(main_array.size()));
+                vectorSequence<int> vec(main_array);
+
+                cout << "Do you want to compare arrays before the sorting ans after? (1-yes, 2-no)\n";
+                int var;
+                cin >> var;
+                if (var == 1)
+                {
+                    cout << "For the list:\n";
+                    list.print();
+                    cout << "For the vector:\n";
+                    vec.print();
+                    cout << "\n\n";
+                }
+
+                sorter_for_list.cocktail_sort(list, 0, list.getLength() - 1);
+                sorter_for_vector.cocktail_sort(vec, 0, list.getLength() - 1);
+                if (var == 1)
+                {
+                    cout << "For the list:\n";
+                    list.print();
+                    cout << "For the vector:\n";
+                    vec.print();
+                    cout <<"\n\n";
+                }
+                list.isSorted();
+                vec.isSorted();
+
+                break;
+            }
+            case 3:
+            {
+                cout << "Input the length of the array: \n";
+                cin >> n;
+                main_array = ArrayGenerator(n).GenerateRandomArray();
+
+                Linked_List_Sequence<int> list(main_array, static_cast<int>(main_array.size()));
+                vectorSequence<int> vec(main_array);
+
+                cout << "Do you want to compare arrays before the sorting ans after? (1-yes, 2-no)\n";
+                int var;
+                cin >> var;
+                if (var == 1)
+                {
+                    cout << "For the list:\n";
+                    list.print();
+                    cout << "For the vector:\n";
+                    vec.print();
+                    cout << "\n\n";
+                }
+
+                sorter_for_list.insertion_sort(list, 0, list.getLength() - 1);
+                sorter_for_vector.insertion_sort(vec, 0, list.getLength() - 1);
+                if (var == 1)
+                {
+                    cout << "For the list:\n";
+                    list.print();
+                    cout << "For the vector:\n";
+                    vec.print();
+                    cout <<"\n\n";
+                }
+                list.isSorted();
+                vec.isSorted();
+
+                break;
+            }
+            case 4:
+            {
+                cout << "Input the length of the array: \n";
+                cin >> n;
+                main_array = ArrayGenerator(n).GenerateRandomArray();
+
+                Linked_List_Sequence<int> list(main_array, static_cast<int>(main_array.size()));
+                vectorSequence<int> vec(main_array);
+
+                cout << "Do you want to compare arrays before the sorting ans after? (1-yes, 2-no)\n";
+                int var;
+                cin >> var;
+                if (var == 1)
+                {
+                    cout << "For the list:\n";
+                    list.print();
+                    cout << "For the vector:\n";
+                    vec.print();
+                    cout << "\n\n";
+                }
+
+                sorter_for_list.count_sort(list, 0, list.getLength() - 1);
+//                sorter_for_vector.count_sort(vec, 0, list.getLength() - 1);
+                if (var == 1)
+                {
+                    cout << "For the list:\n";
+                    list.print();
+                    cout << "For the vector:\n";
+                    vec.print();
+                    cout <<"\n\n";
+                }
+                list.isSorted();
+                vec.isSorted();
+
+                break;
+            }
+            case 5:
+            {
+                cout << "Input the length of the array: \n";
+                cin >> n;
+                main_array = ArrayGenerator(n).GenerateRandomArray();
+
+                Linked_List_Sequence<int> list(main_array, static_cast<int>(main_array.size()));
+                vectorSequence<int> vec(main_array);
+
+                cout << "Do you want to compare arrays before the sorting ans after? (1-yes, 2-no)\n";
+                int var;
+                cin >> var;
+                if (var == 1)
+                {
+                    cout << "For the list:\n";
+                    list.print();
+                    cout << "For the vector:\n";
+                    vec.print();
+                    cout << "\n\n";
+                }
+
+                sorter_for_list.quick_sort(list, 0, list.getLength() - 1);
+                sorter_for_vector.quick_sort(vec, 0, list.getLength() - 1);
+                if (var == 1)
+                {
+                    cout << "For the list:\n";
+                    list.print();
+                    cout << "For the vector:\n";
+                    vec.print();
+                    cout <<"\n\n";
+                }
+                list.isSorted();
+                vec.isSorted();
+
+                break;
+            }
 //            case 8:
 //                cout << "What array's length do you test?\n";
 //                cin >> n;
 //                main_array.resize(n);
-//                cout << "What type of array do you want to test?\n1. Random array\n2. Sorted array\n3. Real array\n";
+//                cout << "What type of array do you want to test?\n1. Random array\n2. Sorted array\n";
 //                cin >> type_of_array;
 //                switch (type_of_array)
 //                {
@@ -95,9 +218,6 @@ int main()
 //                    case 2:
 //                        main_array = ArrayGenerator(n).GenerateSortedArray();
 //                        break;
-//                    case 3:
-//                        main_array = ArrayGenerator(n).GenerateRealArray();
-//                        break;
 //                }
 ////                Bench(main_array, n);
 //                TestSortFunc("Bubble", bubble_sort, main_array, 0, n - 1);
@@ -106,10 +226,11 @@ int main()
 //                TestSortFunc("Count", count_sort, main_array, 0, n - 1);
 //                TestSortFunc("Quick", quick_sort, main_array, 0, n - 1);
 //                break;
-//            case 0:
-//                break;
-//
-//
-//        }
-//    }
+            case 0:
+                break;
+            default:
+                cout << "Wrong choice!\n";
+                break;
+        }
+    }
 }

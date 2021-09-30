@@ -31,6 +31,8 @@ public:
 
     List(T *items, int size);
 
+    List(vector<T> &items, int size);
+
     List(const List<T> &list);
 
     ~List();
@@ -42,8 +44,6 @@ public:
     void pop_front();
 
     Node<T> *getHead() const;
-
-    List<T> *GetSubList(int begin, int end);
 
     void clear();
 
@@ -71,6 +71,25 @@ public:
         cout << "\n";
     }
 
+    void isSorted()
+    {
+        Node<T> *cur_node = head;
+        while (true)
+        {
+            if (cur_node->pNext == nullptr)
+            {
+                cout << "Everything is okay!\n";
+                break;
+            }
+            if (cur_node->data <= cur_node->pNext->data)
+                cur_node = cur_node->pNext;
+            else
+            {
+                cout << "You have an Error in sorting!\n";
+                break;
+            }
+        }
+    }
 
 private:
 
@@ -257,6 +276,15 @@ List<T>::List(const List<T> &list): Size(list.Size)
 ///создание списка
 template<typename T>
 List<T>::List(T *items, int size): Size(0)
+{
+    for (int i = 0; i < size; i++)
+    {
+        append(items[i]);
+    }
+}
+
+template<typename T>
+List<T>::List(vector<T> &items, int size): Size(0)
 {
     for (int i = 0; i < size; i++)
     {
