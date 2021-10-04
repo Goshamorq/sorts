@@ -43,6 +43,7 @@ public:
     {
         data.print();
     }
+
     void isSorted() override
     {
         data.isSorted();

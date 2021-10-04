@@ -3,10 +3,13 @@
 #include "sequence_list.hpp"
 #include "ISorter.hpp"
 #include "vectorSequence.hpp"
+//#include "test.hpp"
+//#include <functional>
 
 int main()
 {
-    const string MENU = "1. Bubble sort\n2. Cocktail sort\n3. Insertion sort\n4. Count sort\n5. Quick sort\n0. Exit\n";
+    const string MENU = "1. Bubble sort\n2. Cocktail sort\n3. Insertion sort\n4. Count sort\n5. Quick sort\n0. "
+                        "Exit\n";
 
     int choice = -1;
     int n = -1;
@@ -53,7 +56,7 @@ int main()
                     list.print();
                     cout << "For the vector:\n";
                     vec.print();
-                    cout <<"\n\n";
+                    cout << "\n\n";
                 }
                 list.isSorted();
                 vec.isSorted();
@@ -89,7 +92,7 @@ int main()
                     list.print();
                     cout << "For the vector:\n";
                     vec.print();
-                    cout <<"\n\n";
+                    cout << "\n\n";
                 }
                 list.isSorted();
                 vec.isSorted();
@@ -125,7 +128,7 @@ int main()
                     list.print();
                     cout << "For the vector:\n";
                     vec.print();
-                    cout <<"\n\n";
+                    cout << "\n\n";
                 }
                 list.isSorted();
                 vec.isSorted();
@@ -136,15 +139,15 @@ int main()
             {
                 cout << "Input the length of the array: \n";
                 cin >> n;
-                main_array = ArrayGenerator(n).GenerateRandomArray();
+                main_array = ArrayGenerator(n).GenerateArrayForCount();
 
                 Linked_List_Sequence<int> list(main_array, static_cast<int>(main_array.size()));
                 vectorSequence<int> vec(main_array);
 
-                cout << "Do you want to compare arrays before the sorting ans after? (1-yes, 2-no)\n";
+                cout << "Do you want to compare arrays before the sorting ans after? (0 - no, 1 - yes)\n";
                 int var;
                 cin >> var;
-                if (var == 1)
+                if (var)
                 {
                     cout << "For the list:\n";
                     list.print();
@@ -154,15 +157,17 @@ int main()
                 }
 
                 sorter_for_list.count_sort(list, 0, list.getLength() - 1);
-//                sorter_for_vector.count_sort(vec, 0, list.getLength() - 1);
-                if (var == 1)
+                sorter_for_vector.count_sort(vec, 0, list.getLength() - 1);
+
+                if (var)
                 {
                     cout << "For the list:\n";
                     list.print();
                     cout << "For the vector:\n";
                     vec.print();
-                    cout <<"\n\n";
+                    cout << "\n\n";
                 }
+
                 list.isSorted();
                 vec.isSorted();
 
@@ -191,41 +196,54 @@ int main()
 
                 sorter_for_list.quick_sort(list, 0, list.getLength() - 1);
                 sorter_for_vector.quick_sort(vec, 0, list.getLength() - 1);
+
                 if (var == 1)
                 {
                     cout << "For the list:\n";
                     list.print();
                     cout << "For the vector:\n";
                     vec.print();
-                    cout <<"\n\n";
+                    cout << "\n\n";
                 }
                 list.isSorted();
                 vec.isSorted();
 
                 break;
             }
-//            case 8:
-//                cout << "What array's length do you test?\n";
-//                cin >> n;
-//                main_array.resize(n);
-//                cout << "What type of array do you want to test?\n1. Random array\n2. Sorted array\n";
-//                cin >> type_of_array;
-//                switch (type_of_array)
-//                {
-//                    case 1:
-//                        main_array = ArrayGenerator(n).GenerateRandomArray();
-//                        break;
-//                    case 2:
-//                        main_array = ArrayGenerator(n).GenerateSortedArray();
-//                        break;
-//                }
-////                Bench(main_array, n);
-//                TestSortFunc("Bubble", bubble_sort, main_array, 0, n - 1);
-//                TestSortFunc("Cocktail", cocktail_sort, main_array, 0, n - 1);
-//                TestSortFunc("Insertion", insertion_sort, main_array, 0, n - 1);
-//                TestSortFunc("Count", count_sort, main_array, 0, n - 1);
-//                TestSortFunc("Quick", quick_sort, main_array, 0, n - 1);
+//            case 6:
+//            {
+//                n = 10000;
+//                main_array = ArrayGenerator(n).GenerateRandomArray();
+//                main_array = ArrayGenerator(n).GenerateArrayForCount();
+//                auto bubble_vector = std::mem_fn(&ISorter<int, vectorSequence<int>>::bubble_sort);
+//                auto cocktail_vector = std::mem_fn(&ISorter<int, vectorSequence<int>>::cocktail_sort);
+//                auto insert_vector = std::mem_fn(&ISorter<int, vectorSequence<int>>::insertion_sort);
+//                auto count_vector = std::mem_fn(&ISorter<int, vectorSequence<int>>::count_sort);
+//                auto quick_vector = std::mem_fn(&ISorter<int, vectorSequence<int>>::quick_sort);
+
+//                auto bubble_list = std::mem_fn(&ISorter<int, Linked_List_Sequence<int>>::bubble_sort);
+//                auto cocktail_list = std::mem_fn(&ISorter<int, Linked_List_Sequence<int>>::cocktail_sort);
+//                auto insert_list = std::mem_fn(&ISorter<int, Linked_List_Sequence<int>>::insertion_sort);
+//                auto count_list = std::mem_fn(&ISorter<int, Linked_List_Sequence<int>>::count_sort);
+//                auto quick_list = std::mem_fn(&ISorter<int, Linked_List_Sequence<int>>::quick_sort);
+
+
+//                BenchArray("bubble_array", sorter_for_vector, bubble_vector, main_array, n);
+//                BenchArray("cocktail_array", sorter_for_vector, cocktail_vector, main_array, n);
+//                BenchArray("insert_array", sorter_for_vector, insert_vector, main_array, n);
+
+//                BenchList("bubble_list", sorter_for_list, bubble_list, main_array, n);
+//                BenchList("cocktail_list", sorter_for_list, cocktail_list, main_array, n);
+//                BenchList("insert_list", sorter_for_list, insert_list, main_array, n);
+
+//                BenchArray("quick_array", sorter_for_vector, quick_vector, main_array, n);
+//                BenchArray("count_array", sorter_for_vector, count_vector, main_array, n);
+
+//                BenchList("quick_list", sorter_for_list, quick_list, main_array, n);
+//                BenchList("count_list", sorter_for_list, count_list, main_array, n);
+
 //                break;
+//            }
             case 0:
                 break;
             default:
