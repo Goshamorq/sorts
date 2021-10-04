@@ -42,6 +42,13 @@ public:
         return a;
     }
 
+    [[nodiscard]] vector<int> GenerateReverseArray() const
+    {
+        vector<int> a = GenerateSortedArray();
+        reverse(a.begin(), a.end());
+        return a;
+    }
+
     [[nodiscard]] vector<int> GenerateSortedArray() const
     {
         random_device rd;

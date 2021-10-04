@@ -3,8 +3,8 @@
 #include "sequence_list.hpp"
 #include "ISorter.hpp"
 #include "vectorSequence.hpp"
-//#include "test.hpp"
-//#include <functional>
+#include "test.hpp"
+#include <functional>
 
 int main()
 {
@@ -213,35 +213,54 @@ int main()
 //            case 6:
 //            {
 //                n = 10000;
+//                main_array = ArrayGenerator(n).GenerateReverseArray();
 //                main_array = ArrayGenerator(n).GenerateRandomArray();
 //                main_array = ArrayGenerator(n).GenerateArrayForCount();
+//
 //                auto bubble_vector = std::mem_fn(&ISorter<int, vectorSequence<int>>::bubble_sort);
 //                auto cocktail_vector = std::mem_fn(&ISorter<int, vectorSequence<int>>::cocktail_sort);
 //                auto insert_vector = std::mem_fn(&ISorter<int, vectorSequence<int>>::insertion_sort);
-//                auto count_vector = std::mem_fn(&ISorter<int, vectorSequence<int>>::count_sort);
-//                auto quick_vector = std::mem_fn(&ISorter<int, vectorSequence<int>>::quick_sort);
-
+//                auto quick_list = std::mem_fn(&ISorter<int, Linked_List_Sequence<int>>::quick_sort);
+//
+//                BenchArray("bubble_array_reversed", sorter_for_vector, bubble_vector, main_array, n);
+//                BenchArray("cocktail_array_reversed", sorter_for_vector, cocktail_vector, main_array, n);
+//                BenchArray("insert_array_reversed", sorter_for_vector, insert_vector, main_array, n);
+//                BenchList("quick_list_reversed", sorter_for_list, quick_list, main_array, n);
+//
+//
+//
+//                n = 1000;
+//                main_array = ArrayGenerator(n).GenerateReverseArray();
 //                auto bubble_list = std::mem_fn(&ISorter<int, Linked_List_Sequence<int>>::bubble_sort);
 //                auto cocktail_list = std::mem_fn(&ISorter<int, Linked_List_Sequence<int>>::cocktail_sort);
 //                auto insert_list = std::mem_fn(&ISorter<int, Linked_List_Sequence<int>>::insertion_sort);
-//                auto count_list = std::mem_fn(&ISorter<int, Linked_List_Sequence<int>>::count_sort);
-//                auto quick_list = std::mem_fn(&ISorter<int, Linked_List_Sequence<int>>::quick_sort);
+//                BenchList("bubble_list_reversed", sorter_for_list, bubble_list, main_array, n);
+//                BenchList("cocktail_list_reversed", sorter_for_list, cocktail_list, main_array, n);
+//                BenchList("insert_list_reversed", sorter_for_list, insert_list, main_array, n);
+//
+//
+//                n = 100000;
+//                main_array = ArrayGenerator(n).GenerateReverseArray();
+//                auto count_vector = std::mem_fn(&ISorter<int, vectorSequence<int>>::count_sort);
+//                auto quick_vector = std::mem_fn(&ISorter<int, vectorSequence<int>>::quick_sort);
+//                BenchArray("quick_array_reversed", sorter_for_vector, quick_vector, main_array, n);
+//                BenchArray("count_array_reversed", sorter_for_vector, count_vector, main_array, n);
+//
 
-
-//                BenchArray("bubble_array", sorter_for_vector, bubble_vector, main_array, n);
-//                BenchArray("cocktail_array", sorter_for_vector, cocktail_vector, main_array, n);
-//                BenchArray("insert_array", sorter_for_vector, insert_vector, main_array, n);
-
-//                BenchList("bubble_list", sorter_for_list, bubble_list, main_array, n);
-//                BenchList("cocktail_list", sorter_for_list, cocktail_list, main_array, n);
-//                BenchList("insert_list", sorter_for_list, insert_list, main_array, n);
-
-//                BenchArray("quick_array", sorter_for_vector, quick_vector, main_array, n);
-//                BenchArray("count_array", sorter_for_vector, count_vector, main_array, n);
-
-//                BenchList("quick_list", sorter_for_list, quick_list, main_array, n);
-//                BenchList("count_list", sorter_for_list, count_list, main_array, n);
-
+//                BenchArray("bubble_array_sorted", sorter_for_vector, bubble_vector, main_array, n);
+//                BenchArray("cocktail_array_sorted", sorter_for_vector, cocktail_vector, main_array, n);
+//                BenchArray("insert_array_sorted", sorter_for_vector, insert_vector, main_array, n);
+//
+//                BenchList("bubble_list_sorted", sorter_for_list, bubble_list, main_array, n);
+//                BenchList("cocktail_list_sorted", sorter_for_list, cocktail_list, main_array, n);
+//                BenchList("insert_list_sorted", sorter_for_list, insert_list, main_array, n);
+//
+//                BenchArray("quick_array_sorted", sorter_for_vector, quick_vector, main_array, n);
+//                BenchArray("count_array_sorted", sorter_for_vector, count_vector, main_array, n);
+//
+//                BenchList("quick_list_sorted", sorter_for_list, quick_list, main_array, n);
+//                BenchList("count_list_sorted", sorter_for_list, count_list, main_array, n);
+//
 //                break;
 //            }
             case 0:
