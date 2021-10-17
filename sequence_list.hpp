@@ -44,9 +44,10 @@ public:
         data.print();
     }
 
-    void isSorted() override
+    void isSorted(bool (*cmp)(const T &, const T &)= [](const T &a, const T &b)
+    { return a < b; }) override
     {
-        data.isSorted();
+        data.isSorted(cmp);
     }
 
     virtual ~Linked_List_Sequence() = default;

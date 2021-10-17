@@ -34,9 +34,10 @@ public:
             cout << vec[i] << ' ';
     }
 
-    void isSorted() override
+    void isSorted(bool (*cmp)(const T &, const T &) = [](const T &a, const T &b)
+    { return a < b; })
     {
-        if (std::is_sorted(vec.begin(), vec.end()))
+        if (std::is_sorted(vec.begin(), vec.end(),cmp))
         {
             cout << "Everything is OK!\n";
         }

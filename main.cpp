@@ -38,17 +38,10 @@ int main()
                 cout << "Do you want to compare arrays before the sorting ans after? (1-yes, 2-no)\n";
                 int var;
                 cin >> var;
-                if (var == 1)
-                {
-                    cout << "For the list:\n";
-                    list.print();
-                    cout << "For the vector:\n";
-                    vec.print();
-                    cout << "\n\n";
-                }
 
-                sorter_for_list.bubble_sort(list, 0, list.getLength() - 1);
-                sorter_for_vector.bubble_sort(vec, 0, list.getLength() - 1);
+                int order = 1;
+                cout << "Choose the order of sorting: normal - 1, reverse - 0\n";
+                cin >> order;
 
                 if (var == 1)
                 {
@@ -58,8 +51,34 @@ int main()
                     vec.print();
                     cout << "\n\n";
                 }
-                list.isSorted();
-                vec.isSorted();
+
+                if (order)
+                {
+                    sorter_for_list.bubble_sort(list, 0, list.getLength() - 1);
+                    sorter_for_vector.bubble_sort(vec, 0, list.getLength() - 1);
+                } else
+                {
+                    sorter_for_list.bubble_sort(list, 0, list.getLength() - 1, Greater);
+                    sorter_for_vector.bubble_sort(vec, 0, list.getLength() - 1, Greater);
+                }
+
+                if (var == 1)
+                {
+                    cout << "For the list:\n";
+                    list.print();
+                    cout << "For the vector:\n";
+                    vec.print();
+                    cout << "\n\n";
+                }
+                if (order)
+                {
+                    list.isSorted();
+                    vec.isSorted();
+                } else
+                {
+                    list.isSorted(Greater);
+                    vec.isSorted(Greater);
+                }
 
                 break;
             }
@@ -75,6 +94,11 @@ int main()
                 cout << "Do you want to compare arrays before the sorting ans after? (1-yes, 2-no)\n";
                 int var;
                 cin >> var;
+
+                int order = 1;
+                cout << "Choose the order of sorting: normal - 1, reverse - 0\n";
+                cin >> order;
+
                 if (var == 1)
                 {
                     cout << "For the list:\n";
@@ -84,8 +108,16 @@ int main()
                     cout << "\n\n";
                 }
 
-                sorter_for_list.cocktail_sort(list, 0, list.getLength() - 1);
-                sorter_for_vector.cocktail_sort(vec, 0, list.getLength() - 1);
+                if (order)
+                {
+                    sorter_for_list.cocktail_sort(list, 0, list.getLength() - 1);
+                    sorter_for_vector.cocktail_sort(vec, 0, list.getLength() - 1);
+                } else
+                {
+                    sorter_for_list.cocktail_sort(list, 0, list.getLength() - 1, Greater);
+                    sorter_for_vector.cocktail_sort(vec, 0, list.getLength() - 1, Greater);
+                }
+
                 if (var == 1)
                 {
                     cout << "For the list:\n";
@@ -94,9 +126,15 @@ int main()
                     vec.print();
                     cout << "\n\n";
                 }
-                list.isSorted();
-                vec.isSorted();
-
+                if (order)
+                {
+                    list.isSorted();
+                    vec.isSorted();
+                } else
+                {
+                    list.isSorted(Greater);
+                    vec.isSorted(Greater);
+                }
                 break;
             }
             case 3:
@@ -111,6 +149,11 @@ int main()
                 cout << "Do you want to compare arrays before the sorting ans after? (1-yes, 2-no)\n";
                 int var;
                 cin >> var;
+
+                int order = 1;
+                cout << "Choose the order of sorting: normal - 1, reverse - 0\n";
+                cin >> order;
+
                 if (var == 1)
                 {
                     cout << "For the list:\n";
@@ -120,8 +163,16 @@ int main()
                     cout << "\n\n";
                 }
 
-                sorter_for_list.insertion_sort(list, 0, list.getLength() - 1);
-                sorter_for_vector.insertion_sort(vec, 0, list.getLength() - 1);
+                if (order)
+                {
+                    sorter_for_list.insertion_sort(list, 0, list.getLength() - 1);
+                    sorter_for_vector.insertion_sort(vec, 0, list.getLength() - 1);
+                } else
+                {
+                    sorter_for_list.insertion_sort(list, 0, list.getLength() - 1, Greater);
+                    sorter_for_vector.insertion_sort(vec, 0, list.getLength() - 1, Greater);
+                }
+
                 if (var == 1)
                 {
                     cout << "For the list:\n";
@@ -130,9 +181,15 @@ int main()
                     vec.print();
                     cout << "\n\n";
                 }
-                list.isSorted();
-                vec.isSorted();
-
+                if (order)
+                {
+                    list.isSorted();
+                    vec.isSorted();
+                } else
+                {
+                    list.isSorted(Greater);
+                    vec.isSorted(Greater);
+                }
                 break;
             }
             case 4:
@@ -144,10 +201,15 @@ int main()
                 Linked_List_Sequence<int> list(main_array, static_cast<int>(main_array.size()));
                 vectorSequence<int> vec(main_array);
 
-                cout << "Do you want to compare arrays before the sorting ans after? (0 - no, 1 - yes)\n";
+                cout << "Do you want to compare arrays before the sorting ans after? (1-yes, 2-no)\n";
                 int var;
                 cin >> var;
-                if (var)
+
+                int order = 1;
+                cout << "Choose the order of sorting: normal - 1, reverse - 0\n";
+                cin >> order;
+
+                if (var == 1)
                 {
                     cout << "For the list:\n";
                     list.print();
@@ -156,10 +218,17 @@ int main()
                     cout << "\n\n";
                 }
 
-                sorter_for_list.count_sort(list, 0, list.getLength() - 1);
-                sorter_for_vector.count_sort(vec, 0, list.getLength() - 1);
+                if (order)
+                {
+                    sorter_for_list.count_sort(list, 0, list.getLength() - 1);
+                    sorter_for_vector.count_sort(vec, 0, list.getLength() - 1);
+                } else
+                {
+                    sorter_for_list.count_sort(list, 0, list.getLength() - 1, Greater);
+                    sorter_for_vector.count_sort(vec, 0, list.getLength() - 1, Greater);
+                }
 
-                if (var)
+                if (var == 1)
                 {
                     cout << "For the list:\n";
                     list.print();
@@ -167,10 +236,15 @@ int main()
                     vec.print();
                     cout << "\n\n";
                 }
-
-                list.isSorted();
-                vec.isSorted();
-
+                if (order)
+                {
+                    list.isSorted();
+                    vec.isSorted();
+                } else
+                {
+                    list.isSorted(Greater);
+                    vec.isSorted(Greater);
+                }
                 break;
             }
             case 5:
@@ -185,17 +259,10 @@ int main()
                 cout << "Do you want to compare arrays before the sorting ans after? (1-yes, 2-no)\n";
                 int var;
                 cin >> var;
-                if (var == 1)
-                {
-                    cout << "For the list:\n";
-                    list.print();
-                    cout << "For the vector:\n";
-                    vec.print();
-                    cout << "\n\n";
-                }
 
-                sorter_for_list.quick_sort(list, 0, list.getLength() - 1);
-                sorter_for_vector.quick_sort(vec, 0, list.getLength() - 1);
+                int order = 1;
+                cout << "Choose the order of sorting: normal - 1, reverse - 0\n";
+                cin >> order;
 
                 if (var == 1)
                 {
@@ -205,9 +272,34 @@ int main()
                     vec.print();
                     cout << "\n\n";
                 }
-                list.isSorted();
-                vec.isSorted();
 
+                if (order)
+                {
+                    sorter_for_list.quick_sort(list, 0, list.getLength() - 1);
+                    sorter_for_vector.quick_sort(vec, 0, list.getLength() - 1);
+                } else
+                {
+                    sorter_for_list.quick_sort(list, 0, list.getLength() - 1, Greater);
+                    sorter_for_vector.quick_sort(vec, 0, list.getLength() - 1, Greater);
+                }
+
+                if (var == 1)
+                {
+                    cout << "For the list:\n";
+                    list.print();
+                    cout << "For the vector:\n";
+                    vec.print();
+                    cout << "\n\n";
+                }
+                if (order)
+                {
+                    list.isSorted();
+                    vec.isSorted();
+                } else
+                {
+                    list.isSorted(Greater);
+                    vec.isSorted(Greater);
+                }
                 break;
             }
 //            case 6:

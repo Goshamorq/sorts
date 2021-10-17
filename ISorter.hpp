@@ -10,12 +10,23 @@ requires(data &seq){
     equality_comparable<T>;
 };
 
+//компараторы
+template<typename T>
+bool Less(const T &a, const T &b)
+{ return a < b; }
+
+template<class T>
+bool Greater(const T &a, const T &b)
+{ return a > b; }
+
 template<typename T, class data>
 requires is_sortable<T, data>
 class ISorter
 {
 public:
-    void bubble_sort(data &vec, int left = 0, int right = -1)
+    void bubble_sort(data &vec, int left = 0, int right = -1,
+                     bool (*cmp)(const T &, const T &) = [](const T &a, const T &b)
+                     { return a < b; })
     {
         check_input(left, right, vec.getLength());
 
@@ -23,7 +34,7 @@ public:
         {
             for (int j = right; j > i; j--)
             {
-                if (vec[j] < vec[j - 1])
+                if (cmp(vec[j], vec[j - 1]))
                 {
                     swap(vec[j], vec[j - 1]);
                 }
@@ -31,7 +42,9 @@ public:
         }
     };
 
-    void cocktail_sort(data &vec, int left = 0, int right = -1)
+    void cocktail_sort(data &vec, int left = 0, int right = -1,
+                       bool (*cmp)(const T &, const T &) = [](const T &a, const T &b)
+                       { return a < b; })
     {
         check_input(left, right, vec.getLength());
 
@@ -43,7 +56,7 @@ public:
 
             for (int i = left; i < right; i++)
             {
-                if (vec[i] > vec[i + 1])
+                if (!cmp(vec[i], vec[i + 1]))
                 {
                     swap(vec[i], vec[i + 1]);
                     last_swap = i;
@@ -53,7 +66,7 @@ public:
 
             for (int i = right; i > left; i--)
             {
-                if (vec[i] < vec[i - 1])
+                if (cmp(vec[i], vec[i - 1]))
                 {
                     swap(vec[i], vec[i - 1]);
                     last_swap = i;
@@ -63,7 +76,9 @@ public:
         }
     };
 
-    void insertion_sort(data &vec, int left = 0, int right = -1)
+    void insertion_sort(data &vec, int left = 0, int right = -1,
+                        bool (*cmp)(const T &, const T &) = [](const T &a, const T &b)
+                        { return a < b; })
     {
         check_input(left, right, vec.getLength());
 
@@ -72,7 +87,7 @@ public:
             int l = left, r = i - 1, middle = (l + r) / 2;
             while (l < r)
             {
-                if (vec[middle] >= vec[i])
+                if (!cmp(vec[middle], vec[i]) || vec[middle] >= vec[i])
                 {
                     if (vec[middle] == vec[i])
                         break;
@@ -82,7 +97,7 @@ public:
                 middle = (l + r) / 2;
             }
             // 1 3 4 4 4 5  |7
-            while(vec[middle] < vec[i])
+            while (cmp(vec[middle], vec[i]))
                 middle++;
 
             for (int j = i; j > middle; j--)
@@ -92,7 +107,9 @@ public:
         }
     };
 
-    void count_sort(data &vec, int left = 0, int right = -1)
+    void count_sort(data &vec, int left = 0, int right = -1,
+                    bool (*cmp)(const T &, const T &) = [](const T &a, const T &b)
+                    { return a < b; })
     {
         check_input(left, right, vec.getLength());
 
@@ -112,21 +129,36 @@ public:
 //            counts[i - min]++;
         for (int i = 0; i < vec.getLength(); i++)
         {
-            counts[vec[i]-min]++;
+            counts[vec[i] - min]++;
         }
 
         int cur_index = 0;
-        for (int i = 0; i < counts.size(); i++)
+        if (cmp(1, 2))
         {
-            if (counts[i] != 0)
+            for (int i = 0; i < counts.size(); i++)
             {
-                for (int j = 0; j < counts[i]; j++)
-                    vec[cur_index++] = i + min;
+                if (counts[i] != 0)
+                {
+                    for (int j = 0; j < counts[i]; j++)
+                        vec[cur_index++] = i + min;
+                }
+            }
+        } else
+        {
+            for (int i = counts.size() - 1; i > -1; i--)
+            {
+                if (counts[i] != 0)
+                {
+                    for (int j = 0; j < counts[i]; j++)
+                        vec[cur_index++] = i + min;
+                }
             }
         }
     };
 
-    void quick_sort(data &vec, int first = 0, int last = -1)
+    void quick_sort(data &vec, int first = 0, int last = -1,
+                    bool (*cmp)(const T &, const T &) = [](const T &a, const T &b)
+                    { return a < b; })
     {
         check_input(first, last, vec.getLength());
 
@@ -134,8 +166,8 @@ public:
         int mid = vec[(f + l) / 2];
         do
         {
-            while (vec[f] < mid) f++;
-            while (vec[l] > mid) l--;
+            while (cmp(vec[f], mid) && vec[f] != mid) f++;
+            while (!cmp(vec[l], mid) && vec[l] != mid) l--;
             if (f <= l)
             {
                 swap(vec[f], vec[l]);
@@ -144,8 +176,8 @@ public:
             }
         } while (f < l);
 
-        if (first < l) quick_sort(vec, first, l);
-        if (f < last) quick_sort(vec, f, last);
+        if (first < l) quick_sort(vec, first, l, cmp);
+        if (f < last) quick_sort(vec, f, last, cmp);
     };
 
 };

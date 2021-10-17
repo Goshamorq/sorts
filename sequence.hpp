@@ -17,7 +17,7 @@ public:
     /// Деструктор
     virtual ~Sequence() = default;
 
-    virtual void isSorted() = 0;
+    virtual void isSorted(bool (*cmp)(const T &, const T &)) = 0;
 
     virtual void print() = 0;
 

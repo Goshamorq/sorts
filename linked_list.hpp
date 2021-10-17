@@ -71,7 +71,8 @@ public:
         cout << "\n";
     }
 
-    void isSorted()
+    void isSorted(bool (*cmp)(const T &, const T &) = [](const T &a, const T &b)
+    { return a < b; })
     {
         Node<T> *cur_node = head;
         while (true)
@@ -81,7 +82,7 @@ public:
                 cout << "Everything is okay!\n";
                 break;
             }
-            if (cur_node->data <= cur_node->pNext->data)
+            if (cmp(cur_node->data, cur_node->pNext->data)||cur_node->data == cur_node->pNext->data)
                 cur_node = cur_node->pNext;
             else
             {
